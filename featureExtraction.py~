@@ -27,14 +27,14 @@ class oneCustomerRecord:
     def addLine(self, line):
         self.transactions.append(transactionRecord(line))
 
-    # feature 1: total purchase amount
+    # feature: total purchase amount
     def getFeatureTotalPurchase(self):
         totalPurchaseAmount = 0
         for record in self.transactions:
             totalPurchaseAmount += record.purchaseAmount
         return totalPurchaseAmount
 
-    # feature 3: total trip to store
+    # feature: total trip to store
     def getFeatureTotalTrips(self):
         datesVectors = []
         for record in self.transactions:
@@ -50,8 +50,7 @@ class oneCustomerRecord:
         self.resultVector.append(self.getFeatureTotalPurchase())
         # feature 2 - total number of transactions by this customer
         self.resultVector.append(len(self.transactions))
-        # feature 3 - total number of trips to store measured by date
-        self.resultVector.append(self.getFeatureTotalTrips())
+        #
         #
         return self.resultVector
 
