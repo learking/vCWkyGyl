@@ -1,9 +1,10 @@
 #group lines that belong to the same id together
-inputFile = file("transaction_first100000.csv", "r")
+inputFile = file("/home/kuangyu/Desktop/transactions_first100000.csv", "r")
 firstLine = inputFile.readline()
 line = inputFile.readline()
 currCustomerID = ""
 currTransactions = []
+
 while(line):
     #deal with first customer
     if currCustomerID == "":
@@ -16,7 +17,10 @@ while(line):
         else:
             #encounter new customer
             ## process the customer before first
-            print(currCustomerID + ":" + str(length(currTransactions)))
+            #print(currCustomerID + ":" + str(len(currTransactions)))
+            lastCustomer = Customer(currTransactions)
+            write lastCustomer.toJSON() to mongoDB
+
             ## init new customer
             currCustomerID = ""
             currTransactions = []          
