@@ -1,5 +1,13 @@
+from Customer import Customer
+#import json
+from pymongo import MongoClient
+
+client = MongoClient()
+db = client.valuedCustomer
+collection = db.transactions_first100000
+
 #group lines that belong to the same id together
-inputFile = file("/home/kuangyu/Desktop/transactions_first100000.csv", "r")
+inputFile = open("/home/kuangyu/Desktop/transactions_first100000.csv", "r")
 firstLine = inputFile.readline()
 line = inputFile.readline()
 currCustomerID = ""
@@ -19,16 +27,14 @@ while(line):
             ## process the customer before first
             #print(currCustomerID + ":" + str(len(currTransactions)))
             lastCustomer = Customer(currTransactions)
-            write lastCustomer.toJSON() to mongoDB
+            collection.insert(lastCustomer.toDict())
+            #print(json.dumps(tmpDict))
 
             ## init new customer
             currCustomerID = ""
             currTransactions = []          
             currTransactions.append(line)
 
-    line = inputFile.readline()  
+    line = inputFile.readline()
 
-#create JSON for each person
-
-
-#insert JSON into mongoDB
+client.close()
